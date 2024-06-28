@@ -12,7 +12,7 @@ const Home = () => {
         <View className="w-full justify-center items-center min-h-[85vh] px-4">
           <Image
             source={images.logo}
-            className="w-[130px] h-[84px]"
+            className="w-[180px] h-[100px]"
             resizeMode="contain"
           />
           <Image
@@ -24,7 +24,7 @@ const Home = () => {
           <View className="relative mt-4">
             <Text className="text-3xl text-white font-bold text-center">
               Dicover Endless Possibilities with{" "}
-              <Text className="text-secondary-200">Uddhyam</Text>
+              <Text className="text-secondary-100">Uddhyam</Text>
             </Text>
 
             <Image
