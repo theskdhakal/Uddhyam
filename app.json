@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "Khoj",
+    "name": "Uddhyam",
 
-    "slug": "khoj",
+    "slug": "uddhyam",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
-    "scheme": "khoj",
+    "scheme": "uddhyam",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/logo.png",
@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jsm.uddhyam"
     },
     "web": {
       "bundler": "metro",
