@@ -1,4 +1,11 @@
-import { Client, Account, ID, Avatars, Databases } from "react-native-appwrite";
+import {
+  Client,
+  Account,
+  ID,
+  Avatars,
+  Databases,
+  Query,
+} from "react-native-appwrite";
 
 interface userProps {
   email: string;
@@ -67,5 +74,23 @@ export const signIn = async ({ email, password }: userProps) => {
     const sesseion = await account.createEmailPasswordSession(email, password);
   } catch (error: any) {
     throw new Error(error);
+  }
+};
+
+export const getCurrentUser = async () => {
+  try {
+    const currentAccount = await account.get();
+
+    if (!currentAccount) throw Error;
+
+    const currentUser = await databases.listDocuments(
+      config.databaseId,
+      config.userCollectionId,
+      [Query.equal("accountId", currentAccount.$id)]
+    );
+    if (!currentUser) throw Error;
+    return currentUser.documents[0];
+  } catch (error) {
+    console.log(error);
   }
 };
