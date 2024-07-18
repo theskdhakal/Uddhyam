@@ -5,7 +5,7 @@ import { images } from "@/constants";
 import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
-import { createUser } from "@/lib/appwrite";
+import { createUser, getCurrentUser } from "@/lib/appwrite";
 
 const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,6 +29,10 @@ const SignUp = () => {
         password: form.password,
         username: form.username,
       });
+
+      // Fetch the current user after successful signup
+      const currentUser = await getCurrentUser();
+      console.log("Current User:", currentUser); // Log the current user
 
       //set it to global state
 
@@ -54,7 +58,7 @@ const SignUp = () => {
 
           <FormField
             title="Username"
-            value={form.email}
+            value={form.username}
             handleChangeText={(e: any) => setForm({ ...form, username: e })}
             otherStyles="mt-10"
           />
