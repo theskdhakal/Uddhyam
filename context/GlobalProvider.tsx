@@ -22,7 +22,15 @@ interface GlobalContextType {
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
-export const useGlobalContext = () => useContext(GlobalContext);
+export const useGlobalContext = () => {
+  const context = useContext(GlobalContext);
+
+  if (context === undefined) {
+    throw new Error("useGlobalContext must be used within a GLobalPRovider");
+  }
+
+  return context;
+};
 
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
