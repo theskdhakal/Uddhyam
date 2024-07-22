@@ -23,6 +23,16 @@ export const config = {
   storageId: "6685def400398192037b",
 };
 
+const {
+  endpoint,
+  platform,
+  projectId,
+  databaseId,
+  userCollectionId,
+  videosCollectionId,
+  storageId,
+} = config;
+
 // Init your React Native SDK
 const client = new Client();
 
@@ -92,5 +102,15 @@ export const getCurrentUser = async () => {
     return currentUser.documents[0];
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getAllPosts = async () => {
+  try {
+    const posts = await databases.listDocuments(databaseId, videosCollectionId);
+
+    return posts.documents;
+  } catch (error: any) {
+    throw new Error(error);
   }
 };

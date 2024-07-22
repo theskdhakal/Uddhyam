@@ -7,6 +7,7 @@ import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import { createUser, getCurrentUser } from "@/lib/appwrite";
 import { useGlobalContext } from "@/context/GlobalProvider";
+import { Account } from "react-native-appwrite";
 
 const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,11 +27,17 @@ const SignUp = () => {
     setIsSubmitting(true);
 
     try {
-      const result = await createUser({
-        email: form.email,
-        password: form.password,
-        username: form.username,
-      });
+      const currentAccount = await getCurrentUser();
+
+      if (!currentAccount) {
+        const result = await createUser({
+          email: form.email,
+          password: form.password,
+          username: form.username,
+        });
+      } else {
+        Alert.alert("Session in progress");
+      }
 
       //set it to global state
       setIsLoggedIn(true);
