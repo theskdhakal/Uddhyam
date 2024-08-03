@@ -1,16 +1,14 @@
 import {
-  View,
-  Text,
   FlatList,
   Image,
   TouchableOpacity,
   ImageBackground,
-  ViewStyle,
 } from "react-native";
 import React, { useState } from "react";
 import * as Animatable from "react-native-animatable";
 import { icons } from "@/constants";
-import { AVPlaybackStatus, ResizeMode, Video } from "expo-av";
+import { ResizeMode, Video } from "expo-av";
+// import VideoPlayer from "expo-video-player";
 
 const zoomIn: any = {
   0: {
@@ -39,19 +37,31 @@ const TrendingItem = ({ activeItem, item }) => {
     <Animatable.View className="mr-5" animation={animation} duration={500}>
       {play ? (
         <Video
-          source={{ uri: item.video }}
+          source={{
+            uri: item.video,
+          }}
           className="w-52 h-72 rounded-35 mt-3 bg-white/10"
           resizeMode={ResizeMode.CONTAIN}
           useNativeControls
           shouldPlay
-          onPlaybackStatusUpdate={(status: AVPlaybackStatus) => {
-            console.log("playback status:", status);
+          onPlaybackStatusUpdate={(status) => {
+            console.log("status is:", status);
             if (status.isLoaded && status.didJustFinish) {
               setPlay(false);
             }
           }}
         />
       ) : (
+        // <VideoPlayer
+        //   videoProps={{
+        //     shouldPlay: true,
+        //     resizeMode: ResizeMode.CONTAIN,
+
+        //     source: {
+        //       uri: item.video,
+        //     },
+        //   }}
+        // />
         <TouchableOpacity
           className="relative justify-center items-center "
           activeOpacity={0.7}
