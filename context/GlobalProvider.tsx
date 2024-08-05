@@ -8,8 +8,10 @@ import {
 } from "react";
 
 interface User {
+  id: string;
   name: string;
   email: string;
+  avatar?: string;
 }
 
 interface GlobalContextType {
@@ -43,8 +45,10 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
         if (res) {
           setIsLoggedIn(true);
           setUser({
+            id: res.$id,
             name: res.username,
             email: res.email,
+            avatar: res.avatar,
           });
         } else {
           setIsLoggedIn(false);

@@ -142,3 +142,17 @@ export const searchPosts = async (query: string) => {
     throw new Error(error);
   }
 };
+
+export const getUserPosts = async (userId: string) => {
+  try {
+    const posts = await databases.listDocuments(
+      databaseId,
+      videosCollectionId,
+      [Query.equal("users.$id", userId)]
+    );
+
+    return posts.documents;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
