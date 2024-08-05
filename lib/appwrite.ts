@@ -81,7 +81,7 @@ export const createUser = async ({ email, password, username }: userProps) => {
 
 export const signIn = async ({ email, password }: userProps) => {
   try {
-    const sesseion = await account.createEmailPasswordSession(email, password);
+    const session = await account.createEmailPasswordSession(email, password);
   } catch (error: any) {
     throw new Error(error);
   }
@@ -144,14 +144,18 @@ export const searchPosts = async (query: string) => {
 };
 
 export const getUserPosts = async (userId: string) => {
+  console.log("userid is:", userId);
   try {
-    const posts = await databases.listDocuments(
+    const response = await databases.listDocuments(
       databaseId,
-      videosCollectionId,
-      [Query.equal("users.$id", userId)]
+      videosCollectionId
     );
 
-    return posts.documents;
+    const data = response.documents;
+
+    const posts = data.filter((item) => item.user.$id === userId);
+    console.log("this post:", posts);
+    return posts;
   } catch (error: any) {
     throw new Error(error);
   }

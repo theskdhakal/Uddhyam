@@ -1,5 +1,5 @@
 import { View, FlatList, TouchableOpacity, Image } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EmptyState from "@/components/EmptyState";
 import { getUserPosts } from "@/lib/appwrite";
@@ -10,15 +10,22 @@ import { icons } from "@/constants";
 
 const Profile = () => {
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
+  const [posts, setPosts] = useState<any[]>([]);
 
-  console.log(user?.id);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      if (user) {
+        try {
+          const userPosts = await getUserPosts(user.id);
+          setPosts(userPosts);
+        } catch (error) {
+          console.log("Error fetching user posts:", error);
+        }
+      }
+    };
 
-  const { data: posts } = useAppwrite(() => {
-    if (user) {
-      getUserPosts(user?.id);
-    }
-    return null;
-  });
+    fetchPosts();
+  }, [user]);
 
   const logout = () => {};
 

@@ -7,7 +7,7 @@ const VideoCard = ({
     title,
     thumbnail,
     video,
-    users: { username, avatar },
+    user: { username, avatar },
   },
 }) => {
   const [play, setPlay] = useState(false);
