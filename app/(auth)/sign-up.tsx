@@ -30,7 +30,7 @@ const SignUp = () => {
       const currentAccount = await getCurrentUser();
 
       if (!currentAccount) {
-        const result = await createUser({
+        await createUser({
           email: form.email,
           password: form.password,
           username: form.username,

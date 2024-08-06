@@ -144,7 +144,7 @@ export const searchPosts = async (query: string) => {
 };
 
 export const getUserPosts = async (userId: string) => {
-  console.log("userid is:", userId);
+  console.log("userId is:", userId);
   try {
     const response = await databases.listDocuments(
       databaseId,
@@ -152,10 +152,20 @@ export const getUserPosts = async (userId: string) => {
     );
 
     const data = response.documents;
+    console.log(data);
 
     const posts = data.filter((item) => item.user.$id === userId);
-    console.log("this post:", posts);
     return posts;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const signOut = async () => {
+  try {
+    const session = await account.deleteSession("current");
+
+    return session;
   } catch (error: any) {
     throw new Error(error);
   }

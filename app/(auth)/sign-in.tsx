@@ -36,7 +36,11 @@ const SignIn = () => {
 
       if (currentUser) {
         setIsLoggedIn(true);
-        setUser({ name: currentUser.username, email: currentUser.email });
+        setUser({
+          name: currentUser.username,
+          email: currentUser.email,
+          id: currentUser.$id,
+        });
       } else {
         setIsLoggedIn(false);
         setUser(null);
