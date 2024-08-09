@@ -63,7 +63,6 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
       });
   }, []);
 
-  console.log("user from globalProvider:", user);
   return (
     <GlobalContext.Provider
       value={{ isLoggedIn, setIsLoggedIn, user, setUser, isLoading }}
