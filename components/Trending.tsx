@@ -45,23 +45,12 @@ const TrendingItem = ({ activeItem, item }) => {
           useNativeControls
           shouldPlay
           onPlaybackStatusUpdate={(status) => {
-            console.log("status is:", status);
             if (status.isLoaded && status.didJustFinish) {
               setPlay(false);
             }
           }}
         />
       ) : (
-        // <VideoPlayer
-        //   videoProps={{
-        //     shouldPlay: true,
-        //     resizeMode: ResizeMode.CONTAIN,
-
-        //     source: {
-        //       uri: item.video,
-        //     },
-        //   }}
-        // />
         <TouchableOpacity
           className="relative justify-center items-center "
           activeOpacity={0.7}
