@@ -136,7 +136,7 @@ export const getLatestPosts = async () => {
   }
 };
 
-export const searchPosts = async (query: "") => {
+export const searchPosts = async (query: any) => {
   try {
     const posts = await databases.listDocuments(
       databaseId,
@@ -150,7 +150,7 @@ export const searchPosts = async (query: "") => {
   }
 };
 
-export const getUserPosts = async (userId: "") => {
+export const getUserPosts = async (userId: any) => {
   console.log("userId is:", userId);
   try {
     const response = await databases.listDocuments(
@@ -252,6 +252,13 @@ export const createVideo = async (formData) => {
     );
 
     return newPost;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const updateVideo = async (video) => {
+  try {
   } catch (error: any) {
     throw new Error(error);
   }

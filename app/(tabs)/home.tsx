@@ -30,6 +30,8 @@ const Home = () => {
     setRefreshing(false);
   };
 
+  console.log("video item is:", posts[0]);
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList

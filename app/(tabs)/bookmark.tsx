@@ -1,11 +1,47 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { View, Text, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import EmptyState from "@/components/EmptyState";
+import { getAllPosts, getLatestPosts } from "@/lib/appwrite";
+import useAppwrite from "@/lib/useAppwrite";
+import VideoCard from "@/components/VideoCard";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const BookMark = () => {
+  const { user, setUser, setIsLoggedIn } = useGlobalContext();
+  const { data: posts, refetch } = useAppwrite(getAllPosts);
+  const { data: latestPosts } = useAppwrite(getLatestPosts);
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
+
   return (
-    <View>
-      <Text>BookMark</Text>
-    </View>
+    <SafeAreaView className="bg-primary h-full">
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => item?.$id}
+        renderItem={({ item }) => <VideoCard videoItem={item} />}
+        ListHeaderComponent={() => (
+          <View className="my-6 px-4 ">
+            <Text className="font-pmedium text-sm text-gray-100">
+              Liked Videos
+            </Text>
+            <Text className="text-2xl font-psemibold text-white">{}</Text>
+          </View>
+        )}
+        ListEmptyComponent={() => (
+          <EmptyState
+            title="No videos Found"
+            subtitle="No videos found for this search query"
+          />
+        )}
+      />
+    </SafeAreaView>
   );
 };
 

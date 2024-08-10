@@ -1,17 +1,30 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import { icons } from "@/constants";
 import { AVPlaybackStatus, ResizeMode, Video } from "expo-av";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const VideoCard = ({
   videoItem: {
+    $id,
     title,
     thumbnail,
     video,
     user: { username, avatar },
   },
 }) => {
+  const [menuClicked, setMenuClicked] = useState(false);
   const [play, setPlay] = useState(false);
+
+  const { user: consumer } = useGlobalContext();
+
+  const handleOnClickSave = (VideoId: string) => {
+    if (consumer?.id) {
+    } else {
+      Alert.alert("Error", "User not logged in !");
+    }
+  };
+
   return (
     <View className="flex-col items-center px-4 mb-14">
       <View className="flex-row gap-3 items-start">
@@ -39,7 +52,24 @@ const VideoCard = ({
           </View>
         </View>
         <View className="pt-2">
-          <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
+          <TouchableOpacity
+            onPress={() => setMenuClicked((prev) => !prev)}
+            className="relative flex flex-row items-center "
+          >
+            {menuClicked && (
+              <TouchableOpacity
+                className="pt-5"
+                onPress={() => handleOnClickSave($id)}
+              >
+                <Text className="bg-white px-4 py-1 font-pmedium">Save</Text>
+              </TouchableOpacity>
+            )}
+            <Image
+              source={icons.menu}
+              className="w-5 h-5 "
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
         </View>
       </View>
 
