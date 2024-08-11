@@ -257,8 +257,52 @@ export const createVideo = async (formData) => {
   }
 };
 
-export const updateVideo = async (video) => {
+export const updateVideo = async (videoId, consumerId) => {
+  console.log("video id is:", videoId);
   try {
+    const videoDocument = await databases.getDocument(
+      databaseId,
+      videosCollectionId,
+      videoId
+    );
+
+    let updatedConsumerList;
+
+    if (videoDocument?.consumer.length > 0) {
+      updatedConsumerList = [...videoDocument.consumer, consumerId];
+    } else {
+      updatedConsumerList = [consumerId];
+    }
+
+    //update video document with new consumer list
+    const updatedVideo = await databases.updateDocument(
+      databaseId,
+      videosCollectionId,
+      videoId,
+      {
+        consumer: updatedConsumerList,
+      }
+    );
+
+    return updatedVideo;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const getUserSavedPosts = async (userId: any) => {
+  try {
+    const response = await databases.listDocuments(
+      databaseId,
+      videosCollectionId
+    );
+
+    const data = response.documents;
+
+    console.log("user saved posts are:,", data);
+    const posts = data.filter((item) => item.consumer.includes(userId));
+
+    return posts;
   } catch (error: any) {
     throw new Error(error);
   }

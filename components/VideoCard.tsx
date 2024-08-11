@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { icons } from "@/constants";
 import { AVPlaybackStatus, ResizeMode, Video } from "expo-av";
 import { useGlobalContext } from "@/context/GlobalProvider";
+import { updateVideo } from "@/lib/appwrite";
 
 const VideoCard = ({
   videoItem: {
@@ -18,8 +19,9 @@ const VideoCard = ({
 
   const { user: consumer } = useGlobalContext();
 
-  const handleOnClickSave = (VideoId: string) => {
+  const handleOnClickSave = async (videoId: string) => {
     if (consumer?.id) {
+      await updateVideo(videoId, consumer.id);
     } else {
       Alert.alert("Error", "User not logged in !");
     }

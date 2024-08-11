@@ -2,15 +2,21 @@ import { View, Text, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EmptyState from "@/components/EmptyState";
-import { getAllPosts, getLatestPosts } from "@/lib/appwrite";
+import { getAllPosts, getLatestPosts, getUserSavedPosts } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";
 import VideoCard from "@/components/VideoCard";
 import { useGlobalContext } from "@/context/GlobalProvider";
 
 const BookMark = () => {
-  const { user, setUser, setIsLoggedIn } = useGlobalContext();
-  const { data: posts, refetch } = useAppwrite(getAllPosts);
-  const { data: latestPosts } = useAppwrite(getLatestPosts);
+  const { user } = useGlobalContext();
+
+  const { data: posts, refetch } = useAppwrite(async () => {
+    if (user) {
+      return await getUserSavedPosts(user?.id);
+    } else {
+      return null;
+    }
+  });
 
   const [refreshing, setRefreshing] = useState(false);
 
