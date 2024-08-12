@@ -29,8 +29,6 @@ const Profile = () => {
     router.replace("/sign-in");
   };
 
-  console.log(user);
-
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList

@@ -299,8 +299,9 @@ export const getUserSavedPosts = async (userId: any) => {
 
     const data = response.documents;
 
-    console.log("user saved posts are:,", data);
-    const posts = data.filter((item) => item.consumer.includes(userId));
+    const posts = data.filter((item) =>
+      item.consumer.some((consumerObj: any) => consumerObj.$id === userId)
+    );
 
     return posts;
   } catch (error: any) {

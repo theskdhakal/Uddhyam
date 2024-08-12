@@ -42,7 +42,7 @@ const BookMark = () => {
         )}
         ListEmptyComponent={() => (
           <EmptyState
-            title="No videos Found"
+            title="No Saved videos Found"
             subtitle="No videos found for this search query"
           />
         )}

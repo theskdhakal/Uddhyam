@@ -15,6 +15,7 @@ const VideoCard = ({
   },
 }) => {
   const [menuClicked, setMenuClicked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [play, setPlay] = useState(false);
 
   const { user: consumer } = useGlobalContext();
@@ -22,6 +23,7 @@ const VideoCard = ({
   const handleOnClickSave = async (videoId: string) => {
     if (consumer?.id) {
       await updateVideo(videoId, consumer.id);
+      setIsSaved(true);
     } else {
       Alert.alert("Error", "User not logged in !");
     }
@@ -63,7 +65,13 @@ const VideoCard = ({
                 className="pt-5"
                 onPress={() => handleOnClickSave($id)}
               >
-                <Text className="bg-white px-4 py-1 font-pmedium">Save</Text>
+                {isSaved ? (
+                  <Text className="bg-white px-4 py-1 font-pmedium">
+                    Remove
+                  </Text>
+                ) : (
+                  <Text className="bg-white px-4 py-1 font-pmedium">Save</Text>
+                )}
               </TouchableOpacity>
             )}
             <Image
