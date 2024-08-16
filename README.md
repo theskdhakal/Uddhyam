@@ -28,6 +28,6 @@ Below are the screenshots for the home and save pages:
 Finally, here are the screenshots for the create and profile pages:
 
 <div style="display: flex; justify-content: space-around;">
-    <img src="assets/Photos-001/create.jpg" alt="Create Page" style="width: 30%;"/>
+    <img src="assets/Photos-001/upload.jpg" alt="Create Page" style="width: 30%;"/>
     <img src="assets/Photos-001/profile.jpg" alt="Profile Page" style="width: 30%;"/>
 </div>
