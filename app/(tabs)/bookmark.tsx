@@ -6,6 +6,7 @@ import { getAllPosts, getLatestPosts, getUserSavedPosts } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";
 import VideoCard from "@/components/VideoCard";
 import { useGlobalContext } from "@/context/GlobalProvider";
+import { RefreshControl } from "react-native";
 
 const BookMark = () => {
   const { user } = useGlobalContext();
@@ -46,6 +47,9 @@ const BookMark = () => {
             subtitle="No videos found for this search query"
           />
         )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </SafeAreaView>
   );
