@@ -8,7 +8,7 @@ Welcome to my React Native project, "UDDHYAM". It's a video-sharing platform ena
 
 Here are the screenshots for the landing, register, and login pages of the app:
 
-<div style="display: flex; justify-content: space-around;">
+<div style="display: flex; justify-content: space-around;gap-5">
     <img src="assets/Photos-001/landing.jpg" alt="Landing Page" style="width: 30%;"/>
     <img src="assets/Photos-001/register.jpg" alt="Register Page" style="width: 30%;"/>
     <img src="assets/Photos-001/login.jpg" alt="Login Page" style="width: 30%;"/>
@@ -18,7 +18,7 @@ Here are the screenshots for the landing, register, and login pages of the app:
 
 Below are the screenshots for the home and save pages:
 
-<div style="display: flex; justify-content: space-around;">
+<div style="display: flex; justify-content: space-around;gap-5">
     <img src="assets/Photos-001/home.jpg" alt="Home Page" style="width: 30%;"/>
     <img src="assets/Photos-001/save.jpg" alt="Save Page" style="width: 30%;"/>
 </div>
@@ -27,7 +27,7 @@ Below are the screenshots for the home and save pages:
 
 Finally, here are the screenshots for the create and profile pages:
 
-<div style="display: flex; justify-content: space-around;">
+<div style="display: flex; justify-content: space-around;gap-5">
     <img src="assets/Photos-001/upload.jpg" alt="Create Page" style="width: 30%;"/>
     <img src="assets/Photos-001/profile.jpg" alt="Profile Page" style="width: 30%;"/>
 </div>
